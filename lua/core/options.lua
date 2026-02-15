@@ -10,7 +10,7 @@ opt.cursorline = true
 opt.wrap = false
 
 -- ===== Cursor / scrolling =====
-opt.scrolloff = 5        -- NOT centered
+opt.scrolloff = 5
 opt.sidescrolloff = 5
 
 -- ===== Indentation =====
@@ -29,4 +29,8 @@ opt.updatetime = 250
 
 -- ===== Split behavior =====
 opt.splitright = true
-opt.splitbelow = true
+opt.splitbelow = tru-- Cursor line underline (instead of background)
+vim.cmd([[
+  highlight CursorLine gui=underline cterm=underline
+]])
+
