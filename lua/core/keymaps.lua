@@ -17,8 +17,8 @@ vim.keymap.set("n", "<leader>c", "ggVGy")
 -- Quit
 vim.keymap.set("n", "<leader>q", ":q<CR>")
 
--- Open nvim config folder in VSCode
-vim.keymap.set("n", "<leader>e", ":silent !code ~/.config/nvim<CR>")
+-- Open file tree (like VS Code explorer)
+vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>")
 
 -- CompetiTest shortcuts
 vim.keymap.set("n", "<leader>cp", ":CompetiTest receive problem<CR>")
