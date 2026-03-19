@@ -72,7 +72,7 @@ require("lazy").setup({
                 "nvim-treesitter/nvim-treesitter",
                 build = ":TSUpdate",
                 opts = {
-                        ensure_installed = { "cpp", "c", "lua" },
+                        ensure_installed = { "cpp", "c", "lua", "html", "css", "javascript", "typescript", "tsx", "json" },
                         highlight = { enable = true },
                 },
         },
@@ -109,6 +109,61 @@ require("lazy").setup({
                                 transparent_background = true,
                         })
                         vim.cmd.colorscheme("catppuccin")
+                end,
+        },
+
+        -- ======================
+        -- Web Dev & LSPs
+        -- ======================
+        {
+                "williamboman/mason.nvim",
+                config = function()
+                        require("mason").setup()
+                end,
+        },
+        {
+                "williamboman/mason-lspconfig.nvim",
+                config = function()
+                        require("mason-lspconfig").setup({
+                                ensure_installed = { "ts_ls", "html", "cssls", "emmet_ls", "tailwindcss" },
+                        })
+                end,
+        },
+        {
+                "neovim/nvim-lspconfig",
+                config = function()
+                        local capabilities = require("cmp_nvim_lsp").default_capabilities()
+                        
+                        -- Setup web dev LSPs
+                        local servers = { "ts_ls", "html", "cssls", "emmet_ls", "tailwindcss" }
+                        for _, lsp in ipairs(servers) do
+                                -- Neovim 0.11 native lsp config API
+                                vim.lsp.config[lsp] = {
+                                        capabilities = capabilities,
+                                }
+                                vim.lsp.enable(lsp)
+                        end
+                end,
+        },
+        {
+                "stevearc/conform.nvim",
+                config = function()
+                        require("conform").setup({
+                                formatters_by_ft = {
+                                        javascript = { "prettier" },
+                                        typescript = { "prettier" },
+                                        javascriptreact = { "prettier" },
+                                        typescriptreact = { "prettier" },
+                                        css = { "prettier" },
+                                        html = { "prettier" },
+                                        json = { "prettier" },
+                                        markdown = { "prettier" },
+                                },
+                                format_on_save = {
+                                        timeout_ms = 500,
+                                        lsp_fallback = true,
+                                },
+                        })
                 end,
         },
 

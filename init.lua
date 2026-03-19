@@ -2,6 +2,7 @@ require("core.options")
 require("core.keymaps")
 require("core.plugins")
 require("core.lsp")
+require("core.autocmds")
 -- Load custom LuaSnip snippets
 require("luasnip.loaders.from_lua").load({
         paths = vim.fn.stdpath("config") .. "/lua/snippets"
@@ -73,7 +74,7 @@ end, { silent = true })
 -----------------------------------------------------------
 
 -- Open file explorer (netrw)
-vim.keymap.set("n", "<leader>e", ":Ex<CR>", { silent = true })
+-- vim.keymap.set("n", "<leader>e", ":Ex<CR>", { silent = true }) -- Disabled in favor of VSCode shortcut in keymaps.lua
 
 -- Change cwd to current file's folder
 vim.keymap.set("n", "<leader>cd", function()
